@@ -1,0 +1,73 @@
+.container {
+    padding: 30px 60px;
+}
+
+.main-container {
+    max-width: 50%;
+    border: 1px solid #333;
+}
+
+.wrapper {
+    padding: 30px;
+}
+
+
+/*register*/
+.required-mark {
+    color: red;
+}
+
+table th {
+    text-align: left;
+    padding-right: 2rem;
+    padding-top: 10px;
+    font-size: 1.2rem;
+}
+
+table td {
+    padding-top: 15px;
+    font-size: 1.2rem;
+}
+
+.input-area, .select-area, .comment-area {
+    width: 300px;
+    border: 1px solid lightgray;
+    vertical-align: top;
+}
+
+.input-area, .select-area {
+    padding: 4px 0;
+}
+
+.comment-area {
+    padding: 15px 0;
+}
+
+.btn-area {
+    margin-top: 50px;
+}
+
+.btn {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    width: 80px;
+    padding: 5px 0;
+}
+
+.btn:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.btn-first {
+    background-color: orange;
+    margin-right: 2.5rem;
+}
+
+.btn-redirect {
+    background-color: #00bfff;
+}
+
+.error-message {
+    color: red;
+}
