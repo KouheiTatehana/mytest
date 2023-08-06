@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('/css/list.css') }}" rel="stylesheet">
     <title>商品一覧画面</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <div class="container">
-        <h1>商品一覧画面</h1>
+        <h1 class="titleRed">商品一覧画面</h1>
         <div class="form-group">
             <form class="form-desc" action="{{ route('listSearch') }}" method="post">
             @csrf
                 <input type="text" class="form-search" name="keyword" placeholder="検索キーワード">
-                <select class="form-select" name="makerKeyword">
+                <select class="form-select" name="makerKeyword" id="selectEach">
                     <option value="選択されていません">メーカー名</option>
-                    @foreach ($companies as $company)
-                        <option value="{{ $company->id }}">{{ $company->company_name }}</option>
-                    @endforeach
+
                 </select>
                 <input type="submit" class="btn btn-search" value="検索">
             </form>
@@ -26,7 +26,7 @@
 
         <div class="table-container">
             <table class="table" border="1" cellspacing="0">
-                <thead>
+                <thead class="product-head">
                     <tr class="row-head">
                         <th class="right-border">ID</th>
                         <th class="left-border right-border">商品画像</th>
@@ -37,29 +37,13 @@
                         <th class="left-border" colspan="2"><a href="{{ route('new') }}"><button type="button" class="btn btn-register">新規登録</button></a></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($products as $product)
-                    <tr class="row-body">
-                        <td class="right-border">{{ $product->id }}</td>
-                        <td class="left-border right-border"><img src="{{ asset($product->img_path) }}"></td>
-                        <td class="left-border right-border">{{ $product->product_name }}</td>
-                        <td class="left-border right-border">¥{{ $product->price }}</td>
-                        <td class="left-border right-border">{{ $product->stock }}</td>
-                        <td class="left-border right-border">{{ $product->company_name }}</td>
-                        <td class="left-border right-border"><a href="{{ route('details', $product->id) }}"><button type="button" class="btn btn-detail">詳細</button></a></td>
-                        <td class="left-border">
-                            <form action="{{ route('deleteList', $product->id) }}" method="post" onsubmit="return deleteForm()">
-                                @csrf
-                                <button type="submit" class="btn btn-delete">削除</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
+                <tbody class="product-body" id="bodyWrapper">
+                    
                 </tbody>
             </table>
         </div>
     </div>
-    {{ $products->links('pagination::default') }}
+    {{-- {{ $products->links('pagination::default') }} --}}
 
 <script src="{{ asset('/js/list.js') }}"></script>
 </body>

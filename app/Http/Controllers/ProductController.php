@@ -14,17 +14,29 @@ use PhpParser\Node\Expr\New_;
 class ProductController extends Controller
 {
     //一覧画面表示
-    public function showList() {
-        $model = new Product();
-        $products = $model->getList();
+    public function showList(Request $request) {
 
-        $documents = new Company();
-        $companies = $documents->getCompanyList();
+        if ($request->ajax()) {
+            $model = new Product();
+            $products = $model->getList();
+    
+            $documents = new Company();
+            $companies = $documents->getCompanyList();
 
-        return view('list', [
-            'products' => $products,
-            'companies' => $companies,
-        ]);
+            echo json_encode([
+                'products' => $products,
+                'companies' => $companies
+            ]);
+
+            /*return response()->json([
+                'products' => $products,
+                'companies' => $companies,
+            ]);*/
+    
+        } else {
+            return view('list');
+        }
+
     }
 
     //検索機能⇒一覧画面表示
@@ -134,10 +146,11 @@ class ProductController extends Controller
 
 
     //削除処理
-    public function deleteSubmit($id) {
+    public function deleteSubmit(Request $request) {
         $model = new Product();
-        $model->deleteProduct($id);
-        return redirect(route('list'));
+        $deleteId = $request->id;
+        $model->deleteProduct($deleteId);
+        // return view('list');
     }
 
 }

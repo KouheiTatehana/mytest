@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/list', [App\Http\Controllers\ProductController::class, 'showList'])->name('list');
 
@@ -36,4 +36,4 @@ Route::get('/edit/{id}', [App\Http\Controllers\ProductController::class, 'showEd
 
 Route::post('/edit/{id}', [App\Http\Controllers\ProductController::class, 'UpdateSubmit'])->name('updateList');
 
-Route::post('/delete/{id}', [App\Http\Controllers\ProductController::class, 'deleteSubmit'])->name('deleteList');
+Route::delete('/delete', [App\Http\Controllers\ProductController::class, 'deleteSubmit'])->name('deleteList');

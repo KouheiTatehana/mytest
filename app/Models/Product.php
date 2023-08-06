@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model
 {
+
     //一覧画面表示
     public function getList() {
         $products = DB::table('products')
             ->select('products.*', 'companies.company_name')
             ->join('companies', 'company_id', '=', 'companies.id')
-            ->paginate(10);
+            ->get();
 
         return $products;
     }
