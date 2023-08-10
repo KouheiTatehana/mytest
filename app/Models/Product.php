@@ -22,15 +22,22 @@ class Product extends Model
 
 
     //検索処理
-    public function searchList($data) {
-        if (!empty($data)) {
+    public function searchList($data1, $data2) {
+        /*if (!empty($data)) {
             $products = DB::table('products')
                 ->select('products.*', 'companies.company_name')
                 ->join('companies', 'company_id', '=', 'companies.id')
                 ->where('product_name', 'like', "%{$data->keyword}%")
                 ->where('company_id', '=', $data->makerKeyword)
                 ->paginate(10);
-        } 
+        }*/
+
+        $products = DB::table('products')
+        ->select('products.*', 'companies.company_name')
+        ->join('companies', 'company_id', '=', 'companies.id')
+        ->where('product_name', 'like', "%{$data1}%")
+        ->where('company_id', '=', $data2)
+        ->get();
         
         return $products;
     }

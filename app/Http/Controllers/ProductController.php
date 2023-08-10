@@ -23,15 +23,15 @@ class ProductController extends Controller
             $documents = new Company();
             $companies = $documents->getCompanyList();
 
-            echo json_encode([
+            /*echo json_encode([
                 'products' => $products,
                 'companies' => $companies
-            ]);
+            ]);*/
 
-            /*return response()->json([
+            return response()->json([
                 'products' => $products,
                 'companies' => $companies,
-            ]);*/
+            ]);
     
         } else {
             return view('list');
@@ -40,14 +40,17 @@ class ProductController extends Controller
     }
 
     //検索機能⇒一覧画面表示
-    public function showSearchList(SearchRequest $request) {
+    public function showSearchList(Request $request) {
         $model = new Product();
-        $products = $model->searchList($request);
+        $keyword = $request->keyword;
+        $makerKeyword = $request->makerKeyword;
+
+        $products = $model->searchList($keyword, $makerKeyword);
 
         $documents = new Company();
         $companies = $documents->getCompanyList();
 
-        return view('list', [
+        return response()->json([
             'products' => $products,
             'companies' => $companies,
         ]);

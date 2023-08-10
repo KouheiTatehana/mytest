@@ -13,14 +13,13 @@
     <div class="container">
         <h1 class="titleRed">商品一覧画面</h1>
         <div class="form-group">
-            <form class="form-desc" action="{{ route('listSearch') }}" method="post">
-            @csrf
-                <input type="text" class="form-search" name="keyword" placeholder="検索キーワード">
+            <form class="form-desc">
+                <input type="text" class="form-search" name="keyword" placeholder="検索キーワード" id="keyword">
                 <select class="form-select" name="makerKeyword" id="selectEach">
                     <option value="選択されていません">メーカー名</option>
 
                 </select>
-                <input type="submit" class="btn btn-search" value="検索">
+                <input type="submit" class="btn btn-search" value="検索" onclick="asyncSearch()">
             </form>
         </div>
 
