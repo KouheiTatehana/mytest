@@ -14,12 +14,27 @@
         <h1 class="titleRed">商品一覧画面</h1>
         <div class="form-group">
             <form class="form-desc">
-                <input type="text" class="form-search" name="keyword" placeholder="検索キーワード" id="keyword">
-                <select class="form-select" name="makerKeyword" id="selectEach">
-                    <option value="選択されていません">メーカー名</option>
-
+                <div class="product-name-search form-area">
+                    <input type="text" class="form-search" name="keyword" placeholder="検索キーワード" id="keyword">
+                </div>
+                <div class="company-name-area form-area">
+                    <select class="form-select" name="makerKeyword" id="selectEach">
+                        <option value="選択されていません">メーカー名</option>
                 </select>
-                <input type="submit" class="btn btn-search" value="検索" onclick="asyncSearch()">
+                </div>
+                <div class="price-search form-area">
+                    <label>価格:</label>
+                    <input type="number" class="number-input" name="min-price" id="min-price">
+                    <span>~</span>
+                    <input type="number" class="number-input" name="max-price" id="max-price">
+                </div>
+                <div class="stock-search form-area">
+                    <label>在庫数:</label>
+                    <input type="number" class="number-input" name="min-stock" id="min-stock">
+                    <span>~</span>
+                    <input type="number" class="number-input" name="max-stock" id="max-stock">
+                </div>
+                <button type="button" class="btn btn-search" onclick="asyncSearch()">検索</button>
             </form>
         </div>
 
@@ -27,12 +42,12 @@
             <table class="table" border="1" cellspacing="0">
                 <thead class="product-head">
                     <tr class="row-head">
-                        <th class="right-border">ID</th>
+                        <th class="right-border">@sortablelink('id', 'ID')</th>
                         <th class="left-border right-border">商品画像</th>
-                        <th class="left-border right-border">商品名</th>
-                        <th class="left-border right-border">価格</th>
-                        <th class="left-border right-border">在庫数</th>
-                        <th class="left-border right-border">メーカー名</th>
+                        <th class="left-border right-border">@sortablelink('product_name', '商品名')</th>
+                        <th class="left-border right-border">@sortablelink('price', '価格')</th>
+                        <th class="left-border right-border">@sortablelink('stock', '在庫数')</th>
+                        <th class="left-border right-border">@sortablelink('company_name', 'メーカー名')</th>
                         <th class="left-border" colspan="2"><a href="{{ route('new') }}"><button type="button" class="btn btn-register">新規登録</button></a></th>
                     </tr>
                 </thead>

@@ -185,8 +185,8 @@ return [
         /*
          * Package Service Providers...
          */
-        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
-        
+
+         
         /*
          * Application Service Providers...
          */
@@ -195,6 +195,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * Third Party Service Providers...
+         */
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
 
     ],
 

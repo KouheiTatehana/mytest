@@ -41,11 +41,15 @@ class ProductController extends Controller
 
     //検索機能⇒一覧画面表示
     public function showSearchList(Request $request) {
-        $model = new Product();
         $keyword = $request->keyword;
         $makerKeyword = $request->makerKeyword;
+        $minPrice = $request->minPrice;
+        $maxPrice = $request->maxPrice;
+        $minStock = $request->minStock;
+        $maxStock = $request->maxStock;
 
-        $products = $model->searchList($keyword, $makerKeyword);
+        $model = new Product();
+        $products = $model->searchList($keyword, $makerKeyword, $minPrice, $maxPrice, $minStock, $maxStock);
 
         $documents = new Company();
         $companies = $documents->getCompanyList();

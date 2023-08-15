@@ -10,6 +10,9 @@ use Kyslik\ColumnSortable\Sortable;
 class Product extends Model
 {
 
+    use Sortable;
+    public $sortable = ['id', 'product_name', 'price', 'stock', 'company_name'];
+
     //一覧画面表示
     public function getList() {
         $products = DB::table('products')
@@ -22,22 +25,41 @@ class Product extends Model
 
 
     //検索処理
-    public function searchList($data1, $data2) {
-        /*if (!empty($data)) {
-            $products = DB::table('products')
-                ->select('products.*', 'companies.company_name')
-                ->join('companies', 'company_id', '=', 'companies.id')
-                ->where('product_name', 'like', "%{$data->keyword}%")
-                ->where('company_id', '=', $data->makerKeyword)
-                ->paginate(10);
-        }*/
+    public function searchList($keyword, $makerKeyword, $minPrice, $maxPrice, $minStock, $maxStock) {
 
-        $products = DB::table('products')
-        ->select('products.*', 'companies.company_name')
+        /*$products = DB::table('products')
         ->join('companies', 'company_id', '=', 'companies.id')
-        ->where('product_name', 'like', "%{$data1}%")
-        ->where('company_id', '=', $data2)
-        ->get();
+        ->select('products.*', 'companies.company_name')
+        ->where('products.product_name', 'like', "%{$data1}%")
+        ->orWhere('products.company_id', '=', $data2)
+        ->get();*/
+
+        $product = DB::table('products')
+        ->join('companies', 'company_id', '=', 'companies.id')
+        ->select('products.id','products.company_id', 'products.product_name', 'products.price', 'products.stock', 'products.comment', 'products.img_path', 'companies.company_name');
+
+        if (!empty($keyword)) {
+            $product->where('products.product_name', 'like', "%{$keyword}%");
+        }
+
+        if (!empty($makerKeyword)) {
+            $product->where('products.company_id', '=', $makerKeyword);
+        }
+
+        if ($minPrice) {
+            $product->where('products.price', '>', $minPrice);
+        } elseif ($maxPrice) {
+            $product->where('products.price', '<', $maxPrice);
+        }
+
+        if ($minStock) {
+            $product->where('products.stock', '>', $minStock);
+        } elseif ($maxStock) {
+            $product->where('products.stock', '<', $maxStock);
+        }
+
+
+        $products = $product->get();
         
         return $products;
     }

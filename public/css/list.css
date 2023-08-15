@@ -2,6 +2,12 @@
     padding: 30px 60px
 }
 
+
+/*検索フォーム*/
+.form-area {
+    display: inline-block;
+}
+
 .form-search {
     padding: 5px 50px 5px 10px;
 }
@@ -11,6 +17,16 @@
     margin: 0 1rem;
 }
 
+.stock-search {
+    margin: 0 2rem 0 1rem;
+}
+
+.number-input{
+    width: 40px;
+}
+
+
+/*テーブル（商品一覧）*/
 .table-container {
     margin-top: 30px;
 }
@@ -31,6 +47,8 @@
     border-right: none;
 }
 
+
+/*ボタン装飾*/
 .btn {
     border: 1px solid lightgray;
     border-radius: 5px;
@@ -54,6 +72,7 @@
     background-color: #ff4500;
     color: white;
 }
+
 
 /*ページネーション*/
 .paginationWrap {
