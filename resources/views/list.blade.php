@@ -19,7 +19,7 @@
                 </div>
                 <div class="company-name-area form-area">
                     <select class="form-select" name="makerKeyword" id="selectEach">
-                        <option value="選択されていません">メーカー名</option>
+                        <option value="">メーカー名</option>
                 </select>
                 </div>
                 <div class="price-search form-area">

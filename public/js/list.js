@@ -56,9 +56,9 @@ function asyncSearch() {
     let keyword5 = $("#min-stock").val();
     let keyword6 = $("#max-stock").val();
 
+
     $("#bodyWrapper").empty();
 
-    //検索ワードが空だったら処理を終わらせる
 
     $.ajax({
         headers: {
@@ -107,56 +107,6 @@ function asyncSearch() {
     });
     
 }
-
-/*$(".btn-search").on('click', function() {
-    let keyword1 = $("#keyword").val();
-    let keyword2 = $("#selectEach").val();
-
-    console.log(keyword1);
-    console.log(keyword2);
-
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: 'list',
-        type: 'POST',
-        cache: false,
-        dataType: 'json',
-        data: {'keyword': keyword1, 'makerKeyword': keyword2}
-    })
-
-    .done(function(data){
-        let products = data.products;
-        let companies = data.companies;
-        
-        $("#bodyWrapper").html();
-
-        $.each(products, function(index, val){
-            html = `<tr class="row-body" id="rowWrapper">
-                        <td class="right-border" id="idArea">${val.id}</td>
-                        <td class="left-border right-border" id="imgArea"><img src="{{ asset('strage/sample/' . ${val.img_path}) }}"></td>
-                        <td class="left-border right-border" id="productNameArea">${val.product_name}</td>
-                        <td class="left-border right-border" id="priceArea">¥${val.price}</td>
-                        <td class="left-border right-border" id="stockArea">${val.stock}</td>
-                        <td class="left-border right-border" id="companyNameArea">${val.company_name}</td>
-                        <td class="left-border right-border"><a href="http://localhost/myproject/public/detail/${val.id}"><button type="button" class="btn btn-detail">詳細</button></a></td>
-                        <td class="left-border">
-                            <form class="deleteForm">
-                                <button type="button" class="btn btn-delete" data-product-id="${val.id}" onclick="deleteMethod(this, ${val.id})">削除</button>
-                            </form>
-                        </td>
-                    </tr>
-            `;
-            $("#bodyWrapper").append(html);
-        });
-    })
-
-    .fail(function(){
-        alert('エラー');
-    });
-
-})*/
 
 
 //削除処理

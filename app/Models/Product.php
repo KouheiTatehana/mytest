@@ -18,6 +18,7 @@ class Product extends Model
         $products = DB::table('products')
             ->select('products.*', 'companies.company_name')
             ->join('companies', 'company_id', '=', 'companies.id')
+            ->sortable()
             ->get();
 
         return $products;
@@ -46,16 +47,20 @@ class Product extends Model
             $product->where('products.company_id', '=', $makerKeyword);
         }
 
-        if ($minPrice) {
-            $product->where('products.price', '>', $minPrice);
+        if ($minPrice && $maxPrice) {
+            $product->whereBetween('products.price', [$minPrice, $maxPrice]);
+        } elseif ($minPrice) {
+            $product->where('products.price', '>=', $minPrice);
         } elseif ($maxPrice) {
-            $product->where('products.price', '<', $maxPrice);
+            $product->where('products.price', '<=', $maxPrice);
         }
 
-        if ($minStock) {
-            $product->where('products.stock', '>', $minStock);
+        if ($minStock && $maxStock) {
+            $product->whereBetween('products.stock', [$minStock, $maxStock]);
+        } elseif ($minStock) {
+            $product->where('products.stock', '>=', $minStock);
         } elseif ($maxStock) {
-            $product->where('products.stock', '<', $maxStock);
+            $product->where('products.stock', '<=', $maxStock);
         }
 
 
