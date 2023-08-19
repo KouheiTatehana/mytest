@@ -7,6 +7,7 @@
     <link href="{{ asset('/css/list.css') }}" rel="stylesheet">
     <title>商品一覧画面</title>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -39,15 +40,15 @@
         </div>
 
         <div class="table-container">
-            <table class="table" border="1" cellspacing="0">
+            <table class="tablesorter" border="1" cellspacing="0" id="table">
                 <thead class="product-head">
                     <tr class="row-head">
-                        <th class="right-border">@sortablelink('id', 'ID')</th>
+                        <th class="right-border">ID</th>
                         <th class="left-border right-border">商品画像</th>
-                        <th class="left-border right-border">@sortablelink('product_name', '商品名')</th>
-                        <th class="left-border right-border">@sortablelink('price', '価格')</th>
-                        <th class="left-border right-border">@sortablelink('stock', '在庫数')</th>
-                        <th class="left-border right-border">@sortablelink('company_name', 'メーカー名')</th>
+                        <th class="left-border right-border">商品名</th>
+                        <th class="left-border right-border">価格</th>
+                        <th class="left-border right-border">在庫数</th>
+                        <th class="left-border right-border">メーカー名</th>
                         <th class="left-border" colspan="2"><a href="{{ route('new') }}"><button type="button" class="btn btn-register">新規登録</button></a></th>
                     </tr>
                 </thead>

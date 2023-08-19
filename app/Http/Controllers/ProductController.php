@@ -23,11 +23,6 @@ class ProductController extends Controller
             $documents = new Company();
             $companies = $documents->getCompanyList();
 
-            /*echo json_encode([
-                'products' => $products,
-                'companies' => $companies
-            ]);*/
-
             return response()->json([
                 'products' => $products,
                 'companies' => $companies,
@@ -157,7 +152,6 @@ class ProductController extends Controller
         $model = new Product();
         $deleteId = $request->id;
         $model->deleteProduct($deleteId);
-        // return view('list');
     }
 
 }

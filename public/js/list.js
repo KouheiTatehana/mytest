@@ -1,6 +1,9 @@
 
 //一覧表示
 $(document).ready(function(){
+
+    $("#bodyWrapper").empty();
+
     $.ajax({
         url: 'list',
         type: 'GET',
@@ -37,6 +40,8 @@ $(document).ready(function(){
             htmlSelect = `<option value="${val.id}">${val.company_name}</option>`;
             $("#selectEach").append(htmlSelect);
         });
+
+        $("#table").trigger("update");
     })
     
     .fail(function(){
@@ -57,7 +62,7 @@ function asyncSearch() {
     let keyword6 = $("#max-stock").val();
 
 
-    $("#bodyWrapper").empty();
+    $("#bodyWrapper").html();
 
 
     $.ajax({
@@ -100,6 +105,8 @@ function asyncSearch() {
             `;
             $("#bodyWrapper").append(html);
         });
+
+        $("#table").trigger("update");
     })
 
     .fail(function(){
@@ -142,3 +149,9 @@ function deleteMethod(btn, id) {
     };
 
 }
+
+
+//ソート機能
+$(function() {
+    $("#table").tablesorter();
+});

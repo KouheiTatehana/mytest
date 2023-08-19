@@ -5,20 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Kyslik\ColumnSortable\Sortable;
+
 
 class Product extends Model
 {
-
-    use Sortable;
-    public $sortable = ['id', 'product_name', 'price', 'stock', 'company_name'];
-
     //一覧画面表示
     public function getList() {
         $products = DB::table('products')
             ->select('products.*', 'companies.company_name')
             ->join('companies', 'company_id', '=', 'companies.id')
-            ->sortable()
             ->get();
 
         return $products;
@@ -148,5 +143,22 @@ class Product extends Model
         DB::table('products')
             ->where('id', '=', $id)
             ->delete();
+    }
+    
+
+    //購入処理（ID取得・在庫管理）
+    public function getProductData($thing) {
+        $products = DB::table('products')
+            ->select('products.*')
+            ->where('products.product_name', '=', $thing)
+            ->first();
+        
+        return $products;
+    }
+
+    public function stockUpdate($data) {
+        DB::table('products')
+            ->where('id', '=', $data)
+            ->decrement('stock', 1);
     }
 }
