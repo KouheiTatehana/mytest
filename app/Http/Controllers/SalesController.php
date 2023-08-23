@@ -16,7 +16,7 @@ class SalesController extends Controller
         //Postmanから送られてきたデータ取得
         $productData = $request->product_name;
 
-        //購入する商品のID取得
+        //購入する商品のID・在庫数取得
         $products = $documents->getProductData($productData);
         $productId = $products->id;
         $productStock = $products->stock;

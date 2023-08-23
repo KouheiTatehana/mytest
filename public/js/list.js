@@ -62,7 +62,7 @@ function asyncSearch() {
     let keyword6 = $("#max-stock").val();
 
 
-    $("#bodyWrapper").html();
+    $("#bodyWrapper").empty();
 
 
     $.ajax({
