@@ -149,9 +149,20 @@ class ProductController extends Controller
 
     //削除処理
     public function deleteSubmit(Request $request) {
-        $model = new Product();
-        $deleteId = $request->id;
-        $model->deleteProduct($deleteId);
+
+        DB::beginTransaction();
+
+        try {
+
+            $model = new Product();
+            $deleteId = $request->id;
+            $model->deleteProduct($deleteId);    
+
+            DB::commit();
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
     }
 
 }
